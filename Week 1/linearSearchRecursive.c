@@ -4,7 +4,7 @@ int linearSearch(int arr[], int key, int index, int size)
 {
     if(index >= size) return -1;
     else if(arr[index] == key) return index;
-    else return linearSearch(arr,key,index+1,size);
+    return linearSearch(arr,key,index+1,size);
 }
 
 int main()
