@@ -2,13 +2,13 @@
 
 int binarySearch(int arr[] , int left , int right , int key)
 {
+	if(left > right) return -1;
+
 	int mid = (left + right)/2;
 	if(arr[mid] == key) return mid;
 
 	if(key > arr[mid]) return binarySearch(arr,mid+1,right,key);
-	else return binarySearch(arr,left,mid-1,key);
-	
-	return -1;
+	return binarySearch(arr,left,mid-1,key);
 }
 
 int main()
