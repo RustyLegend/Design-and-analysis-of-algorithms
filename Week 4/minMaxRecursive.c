@@ -1,44 +1,55 @@
-#include<stdio.h>
+#include <stdio.h>
 
-int min(int arr[], int index, int minElement)
-{
-    if(index == -1) return minElement;
-    else if(arr[index] < minElement) minElement = arr[index];
+void findMinMax(int arr[], int low, int high, int result[]) {
+    int mid;
+    int leftResult[2];  
+    int rightResult[2]; 
 
-	return min(arr,index-1,minElement);
+    if (low == high) {
+        result[0] = arr[low]; 
+        result[1] = arr[low]; 
+        return;
+    }
+
+    if (high == low + 1) {
+        if (arr[low] < arr[high]) {
+            result[0] = arr[low];
+            result[1] = arr[high];
+        } else {
+            result[0] = arr[high];
+            result[1] = arr[low];
+        }
+        return;
+    }
+
+
+    mid = (low + high) / 2;
+
+    findMinMax(arr, low, mid, leftResult);
+    findMinMax(arr, mid + 1, high, rightResult);
+
+    if (leftResult[0] < rightResult[0])
+        result[0] = leftResult[0];
+    else
+        result[0] = rightResult[0];
+
+
+    if (leftResult[1] > rightResult[1])
+        result[1] = leftResult[1];
+    else
+        result[1] = rightResult[1];
 }
 
-int max(int arr[], int index, int maxElement)
-{
-	if(index == -1) return maxElement;
-    else if(arr[index] > maxElement) maxElement = arr[index];
+int main() {
+    int arr[] = {7, 2, 9, 1, 5, 20, 15};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    int finalResult[2]; 
 
-	return max(arr,index-1,maxElement);
-}
+    findMinMax(arr, 0, n - 1, finalResult);
 
-int main()
-{
-    int size;
+    printf("Minimum element: %d\n", finalResult[0]);
+    printf("Maximum element: %d\n", finalResult[1]);
 
-	printf("Enter size: ");
-	scanf("%d",&size);
-
-	if(size <= 0) 
-	{
-		printf("Invalid size."); 
-		return 0;
-	}
-	
-	int arr[size];
-
-	for(int i = 0 ; i < size ; i++)
-	{
-		scanf("%d",&arr[i]);
-	}
-
-    int minElement = min(arr,size-2,arr[size-1]);
-	int maxElement = max(arr,size-2,arr[size-1]);
-
-    printf("Minimum element: %d\n",minElement);
-	printf("Maximum element: %d",maxElement);
+    return 0;
 }
