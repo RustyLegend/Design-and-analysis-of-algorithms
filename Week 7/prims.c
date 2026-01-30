@@ -8,18 +8,6 @@ void addEdge(int graph[V][V] , int u , int v , int weight)
     graph[v-1][u-1] = weight;
 }
 
-void printArray(int graph[V][V])
-{
-    for(int i = 0 ; i < V ; i++)
-    {
-        for(int j = 0 ; j < V ; j++)
-        {
-            printf("%d ",graph[i][j]);
-        }
-        printf("\n");
-    }
-}
-
 int minNumIndex(int graph[V] , int visited[])
 {
     int min = INT_MAX , index = 0;
@@ -58,7 +46,7 @@ void prims(int graph[V][V] , int src)
 int main()
 {
     int graph[V][V] = {0};
-
+    int src = 1;
     addEdge(graph,1,6,10);
     addEdge(graph,1,2,28);
     addEdge(graph,2,7,14);
@@ -69,5 +57,5 @@ int main()
     addEdge(graph,5,6,25);
     addEdge(graph,5,7,24);
 
-    prims(graph,1-1);
+    prims(graph,src-1);
 }
